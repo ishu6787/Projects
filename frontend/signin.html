@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev Skill official Page</title>
+  <link rel="stylesheet" href="login.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+  <section>
+    <div class="form-box">
+      <div class="form-value">
+        <!-- Login Form -->
+        <form id="loginForm" class="form">
+          <h2>Login</h2>
+          <div class="inputbox">
+            <ion-icon name="mail-outline"></ion-icon>
+            <input type="email" id="loginEmail" required placeholder="Email">
+            <label for="loginEmail">Email</label>
+          </div>
+          <div class="inputbox">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" id="loginPassword" required placeholder="Password">
+            <label for="loginPassword">Password</label>
+          </div>
+          <div class="forget">
+            <label><input type="checkbox">Remember Me</label>
+            <a href="#" id="forgotPasswordLink">Forgot Password</a>
+          </div>
+          <button type="submit">Log in</button>
+          <div class="register">
+            <p>Don't have an account? <a href="#" id="registerLink">Register</a></p>
+          </div>
+        </form>
+
+        <!-- Registration Form -->
+        <form id="registerForm" class="form" style="display: none;">
+          <h2>Register</h2>
+          
+          <div class="inputbox">
+            <ion-icon name="mail-outline"></ion-icon>
+            <input type="email" id="email" required placeholder="Email">
+            <label for="email">Email</label>
+          </div>
+          <div class="inputbox">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" id="password" required placeholder="Password">
+            <label for="password">Password</label>
+          </div>
+          <div class="inputbox">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" id="confirmPassword" required placeholder="Confirm Password">
+            <label for="confirmPassword">Confirm Password</label>
+          </div>
+          <button type="submit">Register</button>
+          <div class="register">
+            <p>Already have an account? <a href="#" id="loginLink">Login</a></p>
+          </div>
+        </form>
+
+        <!-- Forgot Password Form -->
+        <form id="forgotPasswordForm" class="form" style="display: none;">
+          <h2>Forgot Password</h2>
+          <div class="inputbox">
+            <ion-icon name="mail-outline"></ion-icon>
+            <input type="email" id="forgotEmail" required placeholder="Email">
+            <label for="forgotEmail">Email</label>
+          </div>
+          <button type="submit">Send Recovery Email</button>
+          <div class="register">
+            <p>Remember your password? <a href="#" id="backToLoginLink">Login</a></p>
+          </div>
+        </form>
+
+        <!-- Reset Password Form -->
+        <form id="resetPasswordForm" class="form" style="display: none;">
+          <h2>Reset Password</h2>
+          <input type="hidden" id="resetToken">
+          <div class="inputbox">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" id="newPassword" required placeholder="New Password">
+            <label for="newPassword">New Password</label>
+          </div>
+          <div class="inputbox">
+            <ion-icon name="lock-closed-outline"></ion-icon>
+            <input type="password" id="confirmNewPassword" required placeholder="Confirm New Password">
+            <label for="confirmNewPassword">Confirm New Password</label>
+          </div>
+          <button type="submit">Reset Password</button>
+          <div class="register">
+            <p><a href="#" id="backToLoginFromResetLink">Back to Login</a></p>
+          </div>
+        </form>
+
+        <!-- Success Message (hidden by default) -->
+        <div id="emailSentMessage" class="form" style="display: none; text-align: center;">
+          <h2>Email Sent!</h2>
+          <p>We've sent a password reset link to your email address.</p>
+          <p>Please check your inbox and follow the instructions.</p>
+          <div class="register" style="margin-top: 20px;">
+            <button id="resetPasswordNowBtn" style="background: #fff; color: #000; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">Reset Password Now</button>
+            <p style="margin-top: 15px;"><a href="#" id="backToLoginFromMessageLink">Back to Login</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // JavaScript to toggle between forms
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const forgotPasswordForm = document.getElementById("forgotPasswordForm");
+    const resetPasswordForm = document.getElementById("resetPasswordForm");
+    const emailSentMessage = document.getElementById("emailSentMessage");
+    const registerLink = document.getElementById("registerLink");
+    const loginLink = document.getElementById("loginLink");
+    const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+    const backToLoginLink = document.getElementById("backToLoginLink");
+    const backToLoginFromResetLink = document.getElementById("backToLoginFromResetLink");
+    const backToLoginFromMessageLink = document.getElementById("backToLoginFromMessageLink");
+    const resetPasswordNowBtn = document.getElementById("resetPasswordNowBtn");
+
+    // Form toggling logic
+    registerLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      hideAllForms();
+      registerForm.style.display = "block";
+    });
+
+    loginLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      hideAllForms();
+      loginForm.style.display = "block";
+    });
+
+    forgotPasswordLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      hideAllForms();
+      forgotPasswordForm.style.display = "block";
+    });
+
+    backToLoginLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      hideAllForms();
+      loginForm.style.display = "block";
+    });
+
+    backToLoginFromResetLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      hideAllForms();
+      loginForm.style.display = "block";
+    });
+
+    backToLoginFromMessageLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      hideAllForms();
+      loginForm.style.display = "block";
+    });
+
+    resetPasswordNowBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      hideAllForms();
+      resetPasswordForm.style.display = "block";
+    });
+
+    function hideAllForms() {
+      loginForm.style.display = "none";
+      registerForm.style.display = "none";
+      forgotPasswordForm.style.display = "none";
+      resetPasswordForm.style.display = "none";
+      emailSentMessage.style.display = "none";
+    }
+
+    // Helper function for API calls
+    async function makeRequest(url, method, body) {
+      const response = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      return await response.json();
+    }
+
+    // Registration Form
+    document.getElementById("registerForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+      // Simple validation
+      if (!validateEmail(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      try {
+        const response = await makeRequest('http://localhost:5000/api/signup', 'POST', { 
+          email, 
+          password
+        });
+        
+        if (response.message === 'User created') {
+          alert("Registration successful!");
+          registerForm.reset();
+          hideAllForms();
+          loginForm.style.display = "block";
+        }
+      } catch (error) {
+        alert("Registration failed. Please try again.");
+      }
+    });
+
+    // Login Form
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      try {
+        const response = await fetch('http://localhost:5000/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        console.log("Login response:", data);
+
+        if (response.ok) {
+          alert("Login successful!");
+          if (data.token) localStorage.setItem('token', data.token);
+          // Redirect or update UI
+        } else {
+          alert(data.message || "Login failed: Invalid credentials");
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        alert("Network error. Please try again.");
+      }
+    });
+
+    // Forgot Password Form - Updated to show success message
+    document.getElementById("forgotPasswordForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("forgotEmail").value.trim();
+
+      try {
+        const response = await makeRequest('http://localhost:5000/api/forgot-password', 'POST', { email });
+        
+        if (response.message === 'Password reset email sent') {
+          // Store the reset token temporarily (in a real app, this would come from the email link)
+          if (response.resetToken) {
+            document.getElementById("resetToken").value = response.resetToken;
+          }
+          
+          // Show success message with option to reset now
+          hideAllForms();
+          emailSentMessage.style.display = "block";
+          forgotPasswordForm.reset();
+        } else {
+          alert(response.message || "Failed to send reset email");
+        }
+      } catch (error) {
+        console.error("Forgot password error:", error);
+        alert("Failed to send reset email. Please try again.");
+      }
+    });
+
+    // Reset Password Form
+    document.getElementById("resetPasswordForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const token = document.getElementById("resetToken").value;
+      const newPassword = document.getElementById("newPassword").value.trim();
+      const confirmNewPassword = document.getElementById("confirmNewPassword").value.trim();
+
+      // Validation
+      if (newPassword.length < 6) {
+        alert("Password must be at least 6 characters long.");
+        return;
+      }
+
+      if (newPassword !== confirmNewPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      try {
+        const response = await makeRequest('http://localhost:5000/api/reset-password', 'POST', { 
+          token, 
+          newPassword 
+        });
+        
+        if (response.message === 'Password successfully reset') {
+          alert("Password reset successful! You can now login with your new password.");
+          resetPasswordForm.reset();
+          hideAllForms();
+          loginForm.style.display = "block";
+        } else {
+          alert(response.message || "Password reset failed");
+        }
+      } catch (error) {
+        console.error("Reset password error:", error);
+        alert("Password reset failed. Please try again.");
+      }
+    });
+
+    // Function to validate email
+    function validateEmail(email) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
+
+    // Check for reset token in URL (if coming from email link)
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const token = urlParams.get('token');
+      
+      if (token) {
+        document.getElementById("resetToken").value = token;
+        hideAllForms();
+        resetPasswordForm.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

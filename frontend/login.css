@@ -1,0 +1,134 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-image: url('back.gif'); /* Ensure this matches your GIF file name */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Form Container */
+  .form-box {
+  
+    
+    background: rgba(255, 255, 255, 0.1); /* Dark semi-transparent background */
+    backdrop-filter: blur(10px); /* Adds a blur effect */
+    border-radius: 20px;
+    padding: 40px;
+    width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Form Header */
+  .form-value h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Input Fields */
+  .inputbox {
+    position: relative;
+    margin-bottom: 25px; /* Adjusted margin for better spacing */
+  }
+  
+  .inputbox ion-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1.2em;
+  }
+  
+  .inputbox input {
+    width: calc(100% - 50px); /* Adjust width to fit inside the container */
+    padding: 10px 10px 10px 40px;
+    border: none;
+    border-bottom: 2px solid #fff;
+    background: transparent;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+  }
+  
+  .inputbox label {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1em;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+  .inputbox input:focus ~ label,
+  .inputbox input:valid ~ label {
+    top: -5px;
+    font-size: 0.8em;
+  }
+  
+  /* Forget Password Section */
+  .forget {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 0.9em;
+  }
+  
+  .forget label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .forget a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .forget a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Button */
+  button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background: #fff;
+    color: #6a11cb;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button:hover {
+    background: #2575fc;
+    color: #fff;
+  }
+  
+  /* Register Link */
+  .register {
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+  }
+  
+  .register a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .register a:hover {
+    text-decoration: underline;
+  }

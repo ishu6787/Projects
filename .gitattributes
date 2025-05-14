@@ -1,0 +1,14 @@
+# Normalize line endings
+* text=auto
+
+# Declare text files
+*.js     text
+*.ts     text
+*.css    text
+*.html   text
+*.json   text
+*.md     text
+
+# Treat shell scripts as LF only
+*.sh     text eol=lf
+*.bash   text eol=lf
